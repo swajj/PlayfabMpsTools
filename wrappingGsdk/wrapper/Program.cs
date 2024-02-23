@@ -22,7 +22,7 @@ namespace wrapper
         {
             if (args.Length <= 1 || args[0] != "-g")
             {
-                Console.WriteLine("Usage: wrapper.exe -g fakegame.exe args...");
+                Console.WriteLine("Usage: wrapper.exe -g GalaxyServer.exe [args...]");
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace wrapper
 
             // We pass port number as a 3rd argument when we start fakegame.exe 
             // Port number is grabbed via GSDK and will be passed to fake game as a listening port.
-            gameProcess = StartProcess(gameserverExe, string.Join(' ', args.Append(_listeningPort.ToString())));
+            gameProcess = StartProcess(gameserverExe, string.Join(' ', args.Append("--config=galaxy_server.port=" + _listeningPort.ToString())));
             // as part of wrapping the main game server executable,
             // we create event handlers to process the output from the game (standard output/standard error)
             // based on this output, we will activate the server and process connected players
